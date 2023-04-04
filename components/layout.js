@@ -21,7 +21,7 @@ export default function Blog(props) {
     </Head>
   );
 
-  if (route.startsWith('/blog')) {
+  //if (route.startsWith('/blog')) {
     return function Layout({ children }) {
       return (
         <>
@@ -33,7 +33,7 @@ export default function Blog(props) {
         </>
       );
     };
-  }
+  //}
 
   return function Layout({ children }) {
     return (
