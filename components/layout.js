@@ -7,29 +7,10 @@ import { Footer } from './footer';
 //For custom overwrites via the MDX plugin / provider
 const components = {};
 
-const headerURLs = [
-  { text: 'home',
-    url: '/'
-  },
-  { text: 'episodes',
-    url: '/episodes'
-  },
-  { text: 'merch',
-    url: '/merch'
-  },
-  { text: 'blog',
-    url: '/blog'
-  },
-  { text: 'contact',
-    url: '/contact'
-  }
-]
-
-
 export default function Blog(props) {
   const { meta, route, ...rest } = props;
 
-  console.log('props',props);
+  //console.log('props',props);
 
     return function Layout({ children }) {
       return (
