@@ -1,11 +1,18 @@
-# Nextra Blank Custom Theme/Boilerplate Example
+# VT2U.COM
 
-A nearly blank MDX blog/content site powered by a custom [Nextra](https://nextra.vercel.app) theme (see `components/layout.js`) w/Tailwind already setup. 
+Website for youtube channel
 
-The post list for the blog index in `pages/index.js` comes out of `./posts.json`. If you wanted to get the Nextra page map to use on the index page, you _could_ make a blank `pages/index.mdx` and move that "page" component into `components/layout` (just check for `route === '/'`) and render it).
+Features:
+List of episodes with links, bonus content
+list of merch / items to purchase
+list of blog posts
+contact page / newsletter
 
-Anyways, hopes this helps. Nextra rocks for static content. 
+Uses:
+https://github.com/jaredpalmer/nextra-blank-custom-theme
 
-
-
-
+Tools:
+Tailwind
+Next.js
+Nextra
+react-icons
