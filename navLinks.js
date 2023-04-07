@@ -8,6 +8,9 @@ const navLinks = [
   { text: 'merch',
     url: '/merch'
   },
+  { text: 'about',
+    url: '/about'
+  },
   { text: 'contact',
     url: '/contact'
   }
