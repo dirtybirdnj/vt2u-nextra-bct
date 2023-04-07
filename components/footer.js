@@ -3,7 +3,7 @@ import navLinks from '../navLinks'
 export function Footer() {
 
   return <>
-  <div className="flex items-center justify-between max-w-3xl px-8 mx-auto py-4">
+  <div className="flex items-center justify-between max-w-3xl px-8 mx-auto py-4 border-t-2">
   <h3>Footer</h3>
     <Link href="/" className="block font-bold text-lg">
     vt2u.com
