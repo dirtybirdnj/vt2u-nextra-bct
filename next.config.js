@@ -5,7 +5,7 @@ module.exports = nextra('./components/layout.js')({
   //   turboMode: true,
   // },
   images: {
-    domains: ['pbs.twimg.com', 'abs.twimg.com'],
+    domains: ['pbs.twimg.com', 'abs.twimg.com','i.ytimg.com'],
   },
   headers() {
     return [
