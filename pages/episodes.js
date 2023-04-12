@@ -50,7 +50,7 @@ function Episodes({ response }) {
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch('http://localhost:3000/api/youtube')
+  const res = await fetch(process.env.VERCEL_URL)
   const response = await res.json()
 
   // By returning { props: { posts } }, the Blog component
