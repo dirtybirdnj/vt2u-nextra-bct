@@ -5,9 +5,10 @@ import Link from 'next/link';
 
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
-function Episodes({ response }) {
 
-  const episodes = response.videos;
+const { google } = require('googleapis');
+
+function Episodes({ episodes }) {
 
   const meta = {
     meta: {
@@ -33,7 +34,7 @@ function Episodes({ response }) {
 
           {episodes.map((episode) => (
             <div>
-              <Image src={episode.thumbnail} width={300} height={100} />
+              <Image src={episode.thumbnail} width={300} height={169} />
               <Link href={`https://www.youtube.com/watch?v=${episode.id}`}>
               <p>{episode.title}</p>
               <p>{episode.description}</p>
@@ -50,16 +51,53 @@ function Episodes({ response }) {
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch(process.env.VERCEL_URL)
-  const response = await res.json()
+  // const res = await fetch(process.env.VERCEL_URL)
+  // const response = await res.json()
 
-  // By returning { props: { posts } }, the Blog component
+
+  const channelId = process.env.YOUTUBE_CHANNEL_ID;
+  const apiKey = process.env.YOUTUBE_API_KEY;
+
+  // if (!channelId || !apiKey) {
+  //   return res.status(400).json({ error: 'Missing required fields' });
+  // }
+
+  const youtube = google.youtube({
+    version: 'v3',
+    auth: apiKey,
+  });
+
+  try {
+    const response = await youtube.search.list({
+      part: 'snippet',
+      channelId,
+      type: 'video',
+      maxResults: 50
+    });
+
+    const episodes = response.data.items.map((item) => ({
+      id: item.id.videoId,
+      title: item.snippet.title,
+      description: item.snippet.description,
+      thumbnail: item.snippet.thumbnails.medium.url,
+    }));
+
+
+
+      // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
-  return {
-    props: {
-      response
+    return {
+      props: {
+        episodes
+      }
     }
+
+  } catch (err) {
+    console.error('Error retrieving videos:', err.message);
+    res.status(500).json({ error: 'Failed to retrieve videos' });
   }
+
+
 }
 
-export default Episodes
+export default Episodes;
