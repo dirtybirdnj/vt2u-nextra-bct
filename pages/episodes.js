@@ -7,6 +7,7 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
 const { google } = require('googleapis');
+const decode = require('decode-html')
 
 function Episodes({ episodes }) {
 
@@ -34,11 +35,20 @@ function Episodes({ episodes }) {
 
           {episodes.map((episode) => (
             <div>
-              <Image src={episode.thumbnail} width={300} height={169} />
-              <Link href={`https://www.youtube.com/watch?v=${episode.id}`}>
-              <p>{episode.title}</p>
-              <p>{episode.description}</p>
-              </Link>
+              <h2>{episode.title}</h2>
+            <div className="flex">
+
+              <Image src={episode.thumbnail} width={480} height={360} />
+              <div>
+
+                <small>{episode.description}</small>
+                <Link href={`https://www.youtube.com/watch?v=${episode.id}`}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Watch Now</button>
+                </Link>
+              </div>
+
+
+              </div>
             </div>
           ))}
 
@@ -75,11 +85,14 @@ export async function getStaticProps() {
       maxResults: 50
     });
 
+    //console.log(response.data.items[0])
+
     const episodes = response.data.items.map((item) => ({
       id: item.id.videoId,
-      title: item.snippet.title,
-      description: item.snippet.description,
-      thumbnail: item.snippet.thumbnails.medium.url,
+      title: decode(item.snippet.title),
+      description: decode(item.snippet.description),
+      thumbnail: item.snippet.thumbnails.high.url,
+      published: item.snippet.publishTime
     }));
 
 
